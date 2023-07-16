@@ -41,4 +41,10 @@ final List<MenuItem> appMenuItems = [
     link: '/historial',
     icon: LineIcons.medicalFile,
   ),
+  //consultorios
+  MenuItem(
+    label: 'Consultorio',
+    link: '/consultorioUser',
+    icon: LineIcons.medicalNotes,
+  ),
 ];

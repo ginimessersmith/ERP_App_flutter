@@ -26,8 +26,14 @@ class AuthController {
           await user.setInt('id', data['data']['id']);
           await user.setString('name', data['data']['name']);
           await user.setString('email', data['data']['email']);
+          await user.setInt('isDoctor', data['data']['isDoctor']);
+          int isDoctor = user.getInt('isDoctor') ?? 0;
           print(data['data']['id']);
-          appRouter.go('/perfil');
+          if (isDoctor == 1) {
+            appRouter.go('/perfil_doctor');
+          } else {
+            appRouter.go('/perfil');
+          }
         } else {
           print('error de password o email');
         }

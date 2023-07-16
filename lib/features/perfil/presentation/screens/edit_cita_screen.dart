@@ -59,7 +59,6 @@ class _EditCitaScreenState extends State<EditCitaScreen> {
         fechaString = cita['fecha'];
         idConsulta = cita['idConsulta'];
         idEspecialidad = cita['idEspecialidad'];
-
         motivoController.text = motivo;
       });
     });

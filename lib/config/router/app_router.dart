@@ -1,3 +1,8 @@
+import 'package:Clinica_ERP/features/perfil/presentation/screens/Screens%20del%20doctor/especialidades_doctor.dart';
+import 'package:Clinica_ERP/features/perfil/presentation/screens/Screens%20del%20doctor/historial_clinico_doctor.dart';
+import 'package:Clinica_ERP/features/perfil/presentation/screens/Screens%20del%20doctor/perfil_doctor.dart';
+import 'package:Clinica_ERP/features/perfil/presentation/screens/Screens%20del%20doctor/recetas_doctor.dart';
+import 'package:Clinica_ERP/features/perfil/presentation/screens/consultorio_user_screen.dart';
 import 'package:go_router/go_router.dart';
 import 'package:Clinica_ERP/features/auth/auth.dart';
 import 'package:Clinica_ERP/features/auth/presentation/screens/guardar_token.dart';
@@ -65,6 +70,27 @@ final appRouter = GoRouter(
     GoRoute(
       path: '/citaCreate',
       builder: (context, state) => const CreateCitaScreen(),
+    ),
+    GoRoute(
+      path: '/consultorioUser',
+      builder: (context, state) => const ConsultorioUserScreen(),
+    ),
+    //TODO* aqui empiezan las rutas que pertenecen a los user doctores
+    GoRoute(
+      path: '/perfil_doctor',
+      builder: (context, state) => const PerfilDoctor(),
+    ),
+    GoRoute(
+      path: '/especialidades_doctor',
+      builder: (context, state) => const EspecialidadesDoctor(),
+    ),
+    GoRoute(
+      path: '/recetas_doctor',
+      builder: (context, state) => const RecetasDoctor(),
+    ),
+    GoRoute(
+      path: '/historial_doctor',
+      builder: (context, state) => const HistorialClinicoDoctor(),
     ),
   ],
 

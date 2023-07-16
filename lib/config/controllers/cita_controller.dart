@@ -194,12 +194,12 @@ class CitaController {
             print(data);
           }
           appRouter.go('/perfil');
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => const PerfilScreen(),
-            ),
-          );
+          // Navigator.push(
+          //   context,
+          //   MaterialPageRoute(
+          //     builder: (context) => const PerfilScreen(),
+          //   ),
+          // );
         } catch (e) {
           if (kDebugMode) {
             print('Error decoding JSON: $e');
