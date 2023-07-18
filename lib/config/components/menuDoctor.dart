@@ -15,26 +15,35 @@ class MenuDoctorItem {
 
 final List<MenuDoctorItem> appMenuDoctorItems = [
   MenuDoctorItem(
-    label: 'Gestionar Cita del Doctor',
+    label: 'Mis Citas',
     link: '/perfil_doctor',
     icon: Icons.home_outlined,
   ),
-  MenuDoctorItem(
-    label: 'Especialidades del doctor',
-    link: '/especialidades_doctor',
-    icon: Icons.local_hospital,
-  ),
-
   /* Mis recetas */
   MenuDoctorItem(
-    label: 'Mis recetas doctor',
+    label: 'Mis recetas',
     link: '/recetas_doctor',
     icon: Icons.receipt_long,
   ),
   /* Historial Clinico */
   MenuDoctorItem(
-    label: 'Historial Clinico doctor',
+    label: 'Historial Clinico',
     link: '/historial_doctor',
     icon: LineIcons.medicalFile,
+  ),
+  MenuDoctorItem(
+    label: 'Consultorio',
+    link: '/consultorio_doctor',
+    icon: LineIcons.info,
+  ),
+  MenuDoctorItem(
+    label: 'Hojas de Consulta',
+    link: '/hoja_consulta',
+    icon: LineIcons.medicalBriefcase,
+  ),
+  MenuDoctorItem(
+    label: 'Tratamientos',
+    link: '/tratamiento',
+    icon: LineIcons.medicalNotes,
   ),
 ];

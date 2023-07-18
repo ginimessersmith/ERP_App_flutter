@@ -7,6 +7,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 import 'package:Clinica_ERP/config/router/app_router.dart';
 
+import '../../features/shared/infrastructure/input/appp.dart';
 import 'api.dart';
 
 class AuthController {
@@ -15,7 +16,7 @@ class AuthController {
     if (email.text.isNotEmpty && password.text.isNotEmpty) {
       print(email.text + password.text);
       SharedPreferences user = await SharedPreferences.getInstance();
-      var response = await http.post(Uri.parse('$apiURl/auth/login'),
+      var response = await http.post(Uri.parse('$apiUrl/auth/login'),
           headers: {'Content-Type': 'application/json'},
           body: jsonEncode({'email': email.text, 'password': password.text}));
 

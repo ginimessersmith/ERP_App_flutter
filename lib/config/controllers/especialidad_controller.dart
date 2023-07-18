@@ -4,6 +4,7 @@ import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../../features/shared/infrastructure/input/appp.dart';
 import 'api.dart';
 
 class EspecialidadController {
@@ -11,7 +12,7 @@ class EspecialidadController {
     SharedPreferences user = await SharedPreferences.getInstance();
     String token = user.getString('token') ?? '';
     var response = await http.get(
-      Uri.parse('$apiURl/especialidades'),
+      Uri.parse('$apiUrl/especialidades'),
       headers: {
         'Accept': 'application/json',
         'Authorization': 'Bearer $token',

@@ -3,15 +3,16 @@ import 'dart:convert';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 
+import '../../features/shared/infrastructure/input/appp.dart';
 import 'api.dart';
 
 class HistorialClinicoController {
-  Future getHistorialClinico() async {
+  Future getHistorialClinico(int idHistorial) async {
     SharedPreferences user = await SharedPreferences.getInstance();
     String token = user.getString('token') ?? '';
     int id = user.getInt('id') ?? 0;
     var response = await http.get(
-      Uri.parse('$apiURl/historiaClinicasUser/$id'),
+      Uri.parse('$apiUrl/historiaClinicasUser/$id'),
       headers: {
         'Accept': 'application/json',
         'Authorization': 'Bearer $token',

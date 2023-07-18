@@ -1,28 +1,29 @@
+import 'package:Clinica_ERP/config/controllers/controllers_Doctors/tratamiento_controller.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../../../../../config/controllers/controllers_Doctors/receta_doctor_controller.dart';
 import '../../../../shared/widgets/side_doctor_menu.dart';
 
-class RecetasDoctor extends StatefulWidget {
-  const RecetasDoctor({super.key});
+class Tratamiento extends StatefulWidget {
+  const Tratamiento({super.key});
 
   @override
-  State<RecetasDoctor> createState() => _RecetasDoctorState();
+  State<Tratamiento> createState() => _TratamientoState();
 }
 
-class _RecetasDoctorState extends State<RecetasDoctor> {
-  List<dynamic> recetasDoctor = [];
+class _TratamientoState extends State<Tratamiento> {
+  List<dynamic> tratamientoDoctor = [];
   final scaffoldKey = GlobalKey<ScaffoldState>();
   String nameUser = '';
   String emailUser = '';
+
   @override
   void initState() {
     // TODO: implement initState
-    RecetaDoctorController().getRecetasDoctor().then((value) {
+    TratamientoController().getTratamientoDoctor().then((value) {
       setState(() {
-        recetasDoctor = value;
+        tratamientoDoctor = value;
       });
     });
     getDatosUser();
@@ -33,17 +34,16 @@ class _RecetasDoctorState extends State<RecetasDoctor> {
     SharedPreferences user = await SharedPreferences.getInstance();
     String name = user.getString('name') ?? '';
     String email = user.getString('email') ?? '';
-
     setState(() {
       nameUser = name;
       emailUser = email;
     });
   }
 
-  void deleteReceta(int index) async {
-    RecetaDoctorController().deleteReceta(recetasDoctor[index]['id']);
+  void deleteTratamiento(int index) async {
+    TratamientoController().deleteTratamiento(tratamientoDoctor[index]['id']);
     setState(() {
-      recetasDoctor.removeAt(index);
+      tratamientoDoctor.removeAt(index);
     });
   }
 
@@ -61,29 +61,29 @@ class _RecetasDoctorState extends State<RecetasDoctor> {
           IconButton(onPressed: () {}, icon: const Icon(Icons.search_rounded))
         ],
       ),
-      body: _RecetasDoctorView(
-        recetas: recetasDoctor,
-        onDelete: deleteReceta,
+      body: _TratamientoView(
+        tratamientos: tratamientoDoctor,
+        onDelete: deleteTratamiento,
       ),
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () {},
-        label: Text('Nueva Receta'),
+        label: Text('Nueva Tratamiento'),
       ),
     );
   }
 }
 
-class _RecetasDoctorView extends StatelessWidget {
-  const _RecetasDoctorView(
-      {super.key, required this.recetas, required this.onDelete});
+class _TratamientoView extends StatelessWidget {
+  const _TratamientoView(
+      {super.key, required this.tratamientos, required this.onDelete});
 
-  final List<dynamic> recetas;
+  final List<dynamic> tratamientos;
   final Function(int) onDelete;
 
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
-      itemCount: recetas.length,
+      itemCount: tratamientos.length,
       itemBuilder: (BuildContext context, int index) {
         return Container(
           margin: const EdgeInsets.all(6),
@@ -103,18 +103,15 @@ class _RecetasDoctorView extends StatelessWidget {
                       child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text('Paciente: ${recetas[index]['usuario']['name']}'),
-                      Text('Cantidad: ${recetas[index]['catnidad']}'),
-                      Text('Dosis: ${recetas[index]['dosis']}'),
-                      Text('Frecuencia: ${recetas[index]['frecuencia']}'),
                       Text(
-                          'Diagnostico: ${recetas[index]['receta'][0]['hoja_consulta']['diagnostico']}'),
+                          'Paciente: ${tratamientos[index]['paciente']['name']}'),
                       Text(
-                          'Medicamento: ${recetas[index]['medicamento']['descripcion']}'),
+                          'Descripcion: ${tratamientos[index]['descripcion']}'),
+                      Text('Sintoma: ${tratamientos[index]['nombre']}'),
                       Text(
-                          'Indicacion: ${recetas[index]['receta'][0]['hoja_consulta']['indicación']}'),
+                          'Duracion del tratamiento: ${tratamientos[index]['duracion']}'),
                       Text(
-                          'Proxima Consulta: ${recetas[index]['receta'][0]['hoja_consulta']['proximaConsulta']}')
+                          'Medicamento: ${tratamientos[index]['medicamento']['descripcion']}'),
                     ],
                   )),
                   IconButton(

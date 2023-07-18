@@ -1,28 +1,29 @@
+import 'package:Clinica_ERP/config/controllers/controllers_Doctors/hoja_consulta_controller.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../../../../../config/controllers/controllers_Doctors/receta_doctor_controller.dart';
 import '../../../../shared/widgets/side_doctor_menu.dart';
 
-class RecetasDoctor extends StatefulWidget {
-  const RecetasDoctor({super.key});
+class HojaConsulta extends StatefulWidget {
+  const HojaConsulta({super.key});
 
   @override
-  State<RecetasDoctor> createState() => _RecetasDoctorState();
+  State<HojaConsulta> createState() => _HojaConsultaState();
 }
 
-class _RecetasDoctorState extends State<RecetasDoctor> {
-  List<dynamic> recetasDoctor = [];
+class _HojaConsultaState extends State<HojaConsulta> {
+  List<dynamic> hojaConsultaDoctor = [];
   final scaffoldKey = GlobalKey<ScaffoldState>();
   String nameUser = '';
   String emailUser = '';
+
   @override
   void initState() {
     // TODO: implement initState
-    RecetaDoctorController().getRecetasDoctor().then((value) {
+    HojaConsultaController().getHojaConsultaDoctor().then((value) {
       setState(() {
-        recetasDoctor = value;
+        hojaConsultaDoctor = value;
       });
     });
     getDatosUser();
@@ -33,17 +34,17 @@ class _RecetasDoctorState extends State<RecetasDoctor> {
     SharedPreferences user = await SharedPreferences.getInstance();
     String name = user.getString('name') ?? '';
     String email = user.getString('email') ?? '';
-
     setState(() {
       nameUser = name;
       emailUser = email;
     });
   }
 
-  void deleteReceta(int index) async {
-    RecetaDoctorController().deleteReceta(recetasDoctor[index]['id']);
+  void deleteHojaConsulta(int index) async {
+    HojaConsultaController()
+        .deleteHojaConsultaDoctor(hojaConsultaDoctor[index]['id']);
     setState(() {
-      recetasDoctor.removeAt(index);
+      hojaConsultaDoctor.removeAt(index);
     });
   }
 
@@ -56,34 +57,32 @@ class _RecetasDoctorState extends State<RecetasDoctor> {
         email: emailUser,
       ),
       appBar: AppBar(
-        title: const Text('Sus Recetas son: '),
+        title: const Text('Hojas de Consulta'),
         actions: [
           IconButton(onPressed: () {}, icon: const Icon(Icons.search_rounded))
         ],
       ),
-      body: _RecetasDoctorView(
-        recetas: recetasDoctor,
-        onDelete: deleteReceta,
+      body: _HojaConsulta(
+        hojaConsulta: hojaConsultaDoctor,
+        onDelete: deleteHojaConsulta,
       ),
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () {},
-        label: Text('Nueva Receta'),
+        label: Text('Nueva Hoja Consulta'),
       ),
     );
   }
 }
 
-class _RecetasDoctorView extends StatelessWidget {
-  const _RecetasDoctorView(
-      {super.key, required this.recetas, required this.onDelete});
-
-  final List<dynamic> recetas;
+class _HojaConsulta extends StatelessWidget {
+  const _HojaConsulta(
+      {super.key, required this.hojaConsulta, required this.onDelete});
+  final List<dynamic> hojaConsulta;
   final Function(int) onDelete;
-
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
-      itemCount: recetas.length,
+      itemCount: hojaConsulta.length,
       itemBuilder: (BuildContext context, int index) {
         return Container(
           margin: const EdgeInsets.all(6),
@@ -103,24 +102,19 @@ class _RecetasDoctorView extends StatelessWidget {
                       child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text('Paciente: ${recetas[index]['usuario']['name']}'),
-                      Text('Cantidad: ${recetas[index]['catnidad']}'),
-                      Text('Dosis: ${recetas[index]['dosis']}'),
-                      Text('Frecuencia: ${recetas[index]['frecuencia']}'),
                       Text(
-                          'Diagnostico: ${recetas[index]['receta'][0]['hoja_consulta']['diagnostico']}'),
+                          'Paciente: ${hojaConsulta[index]['usuario']['name']}'),
                       Text(
-                          'Medicamento: ${recetas[index]['medicamento']['descripcion']}'),
+                          'Diagnostico: ${hojaConsulta[index]['diagnostico']}'),
+                      Text('Indicacion: ${hojaConsulta[index]['indicación']}'),
                       Text(
-                          'Indicacion: ${recetas[index]['receta'][0]['hoja_consulta']['indicación']}'),
-                      Text(
-                          'Proxima Consulta: ${recetas[index]['receta'][0]['hoja_consulta']['proximaConsulta']}')
+                          'Proxima Consulta: ${hojaConsulta[index]['proximaConsulta']}'),
                     ],
                   )),
                   IconButton(
                     onPressed: () {},
                     icon: const Icon(Icons.edit),
-                    color: Colors.green,
+                    color: Colors.blue,
                   ),
                   IconButton(
                     onPressed: () {

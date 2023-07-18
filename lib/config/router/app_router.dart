@@ -1,7 +1,11 @@
-import 'package:Clinica_ERP/features/perfil/presentation/screens/Screens%20del%20doctor/especialidades_doctor.dart';
+import 'package:Clinica_ERP/features/perfil/presentation/screens/Screens%20del%20doctor/consultorio_doctor.dart';
+import 'package:Clinica_ERP/features/perfil/presentation/screens/Screens%20del%20doctor/create_historial.dart';
+import 'package:Clinica_ERP/features/perfil/presentation/screens/Screens%20del%20doctor/edit_historial.dart';
 import 'package:Clinica_ERP/features/perfil/presentation/screens/Screens%20del%20doctor/historial_clinico_doctor.dart';
+import 'package:Clinica_ERP/features/perfil/presentation/screens/Screens%20del%20doctor/hoja_consulta.dart';
 import 'package:Clinica_ERP/features/perfil/presentation/screens/Screens%20del%20doctor/perfil_doctor.dart';
 import 'package:Clinica_ERP/features/perfil/presentation/screens/Screens%20del%20doctor/recetas_doctor.dart';
+import 'package:Clinica_ERP/features/perfil/presentation/screens/Screens%20del%20doctor/tratamiento.dart';
 import 'package:Clinica_ERP/features/perfil/presentation/screens/consultorio_user_screen.dart';
 import 'package:go_router/go_router.dart';
 import 'package:Clinica_ERP/features/auth/auth.dart';
@@ -15,7 +19,7 @@ import 'package:Clinica_ERP/features/perfil/products.dart';
 import '../../features/perfil/presentation/screens/doctores_screen.dart';
 
 final appRouter = GoRouter(
-  initialLocation: '/guardarToken',
+  initialLocation: '/login',
   routes: [
     ///* Auth Routes
     GoRoute(
@@ -81,10 +85,6 @@ final appRouter = GoRouter(
       builder: (context, state) => const PerfilDoctor(),
     ),
     GoRoute(
-      path: '/especialidades_doctor',
-      builder: (context, state) => const EspecialidadesDoctor(),
-    ),
-    GoRoute(
       path: '/recetas_doctor',
       builder: (context, state) => const RecetasDoctor(),
     ),
@@ -92,6 +92,22 @@ final appRouter = GoRouter(
       path: '/historial_doctor',
       builder: (context, state) => const HistorialClinicoDoctor(),
     ),
+    GoRoute(
+      path: '/consultorio_doctor',
+      builder: (context, state) => const ConsultorioDoctor(),
+    ),
+    GoRoute(
+      path: '/hoja_consulta',
+      builder: (context, state) => const HojaConsulta(),
+    ),
+    GoRoute(
+      path: '/tratamiento',
+      builder: (context, state) => const Tratamiento(),
+    ),
+    // GoRoute(
+    //   path: '/create_historia_clinica',
+    //   builder: (context, state) => const CreateHistorialClinico(),
+    // ),
   ],
 
   ///! TODO: Bloquear si no se está autenticado de alguna manera

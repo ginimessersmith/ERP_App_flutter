@@ -1,3 +1,4 @@
+import 'package:Clinica_ERP/config/controllers/controllers_Doctors/historia_clinica_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:Clinica_ERP/config/controllers/historial_controller.dart';
@@ -33,7 +34,7 @@ class _HistorialClinicoScreeenState extends State<HistorialClinicoScreeen> {
   void initState() {
     // TODO: implement initState
     getDatosUser();
-    HistorialClinicoController().getHistorialClinico().then((value) {
+    HistoriaClinicaController().getHistoriaClinicaDoctor().then((value) {
       setState(() {
         historialClinico = value;
       });
@@ -56,6 +57,14 @@ class _HistorialClinicoScreeenState extends State<HistorialClinicoScreeen> {
         ],
       ),
       body: _HistorialClinicoView(historialClinico: historialClinico),
+      floatingActionButton: FloatingActionButton.extended(
+        label: const Text('Nueva Historia Clinica'),
+        icon: const Icon(Icons.add),
+        onPressed: () {
+          /* GoRouter.of(context).go('/citaCreate'); */
+          //appRouter.go('/citaCreate');
+        },
+      ),
     );
   }
 }

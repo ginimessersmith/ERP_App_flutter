@@ -7,6 +7,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:Clinica_ERP/config/router/app_router.dart';
 
 import '../../features/perfil/presentation/screens/products_screen.dart';
+import '../../features/shared/infrastructure/input/appp.dart';
 import 'api.dart';
 
 class CitaController {
@@ -15,7 +16,7 @@ class CitaController {
     int id = user.getInt('id') ?? 0;
     String token = user.getString('token') ?? '';
     var response = await http.get(
-      Uri.parse('$apiURl/citasUser/$id'),
+      Uri.parse('$apiUrl/citasUser/$id'),
       headers: {
         'Accept': 'application/json',
         'Authorization': 'Bearer $token',
@@ -48,7 +49,7 @@ class CitaController {
     SharedPreferences user = await SharedPreferences.getInstance();
     String token = user.getString('token') ?? '';
     var response = await http.get(
-      Uri.parse('$apiURl/citas/$id'),
+      Uri.parse('$apiUrl/citas/$id'),
       headers: {
         'Accept': 'application/json',
         'Authorization': 'Bearer $token',
@@ -77,7 +78,7 @@ class CitaController {
     SharedPreferences user = await SharedPreferences.getInstance();
     String token = user.getString('token') ?? '';
     var response = await http.delete(
-      Uri.parse('$apiURl/citas/$id'),
+      Uri.parse('$apiUrl/citas/$id'),
       headers: {
         'Accept': 'application/json',
         'Authorization': 'Bearer $token',
@@ -103,7 +104,7 @@ class CitaController {
     SharedPreferences user = await SharedPreferences.getInstance();
     String token = user.getString('token') ?? '';
     var response = await http.get(
-      Uri.parse('$apiURl/consultas'),
+      Uri.parse('$apiUrl/consultas'),
       headers: {
         'Accept': 'application/json',
         'Authorization': 'Bearer $token',
@@ -136,7 +137,7 @@ class CitaController {
     SharedPreferences user = await SharedPreferences.getInstance();
     String token = user.getString('token') ?? '';
     var response = await http.get(
-      Uri.parse('$apiURl/especialidades'),
+      Uri.parse('$apiUrl/especialidades'),
       headers: {
         'Accept': 'application/json',
         'Authorization': 'Bearer $token',
@@ -169,7 +170,7 @@ class CitaController {
       SharedPreferences user = await SharedPreferences.getInstance();
       String token = user.getString('token') ?? '';
       var response = await http.put(
-        Uri.parse('$apiURl/citas/$id'),
+        Uri.parse('$apiUrl/citas/$id'),
         body: {
           'motivo': motivo,
           'fecha': fecha,
@@ -225,7 +226,7 @@ class CitaController {
       SharedPreferences user = await SharedPreferences.getInstance();
       String token = user.getString('token') ?? '';
       var response = await http.post(
-        Uri.parse('$apiURl/citas'),
+        Uri.parse('$apiUrl/citas'),
         body: {
           'motivo': motivo,
           'fecha': fecha,
